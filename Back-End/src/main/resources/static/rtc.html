@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+  <title>rtc</title>
+  <link rel="stylesheet" href="/style/rtc.css">
+
+</head>
+
+<body>
+<div class="wrap">
+  <div>
+    <div>
+      <button type="button" id="connect" >接通</button>
+      <button type="button" id="hangUp">掛斷</button>
+      <!--      <button type="button" id="refreshPage"></button>-->
+      <button type="button" id="videoIO">close</button>
+    </div>
+    <div class="video-box">
+      <div class="local-video">
+        <video id="local-video" autoplay></video>
+      </div>
+      <div class="remote-video">
+        <video id="remote-video" autoplay></video>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/rtc.js"></script>
+</body>
+
+</html>

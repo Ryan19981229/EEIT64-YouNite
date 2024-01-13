@@ -1,0 +1,113 @@
+/* 整個 Modal 的樣式 */
+.alertModal {
+  .modal-body {
+    align-items: center;
+    .ui {
+      margin-top: 0.75rem;
+    }
+  }
+  .modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 10px 0.5px;
+  }
+
+  .modal-header {
+    border: none;
+  }
+  .modal-body {
+    display: flex;
+    justify-content: center;
+  }
+  svg {
+    height: 2rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* icon 的樣式 */
+
+.ui-success {
+  &-circle {
+    stroke-dasharray: 260.75219024795285px, 260.75219024795285px;
+    stroke-dashoffset: 260.75219024795285px;
+    transform: rotate(220deg);
+    transform-origin: center center;
+    stroke-linecap: round;
+    animation: ani-success-circle 1s ease-in both;
+  }
+  &-path {
+    stroke-dasharray: 60px 64px;
+    stroke-dashoffset: 62px;
+    stroke-linecap: round;
+    animation: ani-success-path 0.4s 1s ease-in both;
+  }
+}
+
+@keyframes ani-success-circle {
+  to {
+    stroke-dashoffset: 782.2565707438586px;
+  }
+}
+
+@keyframes ani-success-path {
+  0% {
+    stroke-dashoffset: 62px;
+  }
+  65% {
+    stroke-dashoffset: -5px;
+  }
+  84% {
+    stroke-dashoffset: 4px;
+  }
+  100% {
+    stroke-dashoffset: -2px;
+  }
+}
+
+.ui-error {
+  &-circle {
+    stroke-dasharray: 260.75219024795285px, 260.75219024795285px;
+    stroke-dashoffset: 260.75219024795285px;
+    animation: ani-error-circle 1.2s linear;
+  }
+  &-line1 {
+    stroke-dasharray: 54px 55px;
+    stroke-dashoffset: 55px;
+    stroke-linecap: round;
+    animation: ani-error-line 0.15s 1.2s linear both;
+  }
+  &-line2 {
+    stroke-dasharray: 54px 55px;
+    stroke-dashoffset: 55px;
+    stroke-linecap: round;
+    animation: ani-error-line 0.2s 0.9s linear both;
+  }
+}
+
+@keyframes ani-error-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes ani-error-circle {
+  0% {
+    stroke-dasharray: 0, 260.75219024795285px;
+    stroke-dashoffset: 0;
+  }
+  35% {
+    stroke-dasharray: 120px, 120px;
+    stroke-dashoffset: -120px;
+  }
+  70% {
+    stroke-dasharray: 0, 260.75219024795285px;
+    stroke-dashoffset: -260.75219024795285px;
+  }
+  100% {
+    stroke-dasharray: 260.75219024795285px, 0;
+    stroke-dashoffset: -260.75219024795285px;
+  }
+}

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tw.com.younite.mapper.OrdersMapper">
+    <cache-ref namespace="tw.com.younite.mapper.UserMapper"/>
+    <resultMap id="OrdersEntityMap" type="tw.com.younite.entity.OrdersEntity">
+        <id column="id" property="id"></id>
+        <result column="user_id" property="userId"></result>
+        <result column="item_id" property="itemId"></result>
+        <result column="amount" property="amount"></result>
+        <result column="unlocked" property="unlocked"></result>
+        <result column="purchased_at" property="purchased"></result>
+        <result column="merchant_trade_no" property="mTradeNo"></result>
+
+    </resultMap>
+
+    <insert
+            id="insertOrder"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `orders`
+        (`user_id`, `item_id`, `amount`, `unlocked`,
+         `purchased_at`)
+        VALUES ( #{userId}, #{itemId}, #{amount}, #{unlocked}, #{purchased});
+    </insert>
+
+
+    <update id="updateUnlocked">
+        UPDATE `orders` SET
+                           unlocked = TRUE,
+                           purchased_at = NOW()
+        WHERE `merchant_trade_no` = #{mTradeNo}
+    </update>
+
+    <update id="updateLocked">
+        UPDATE `orders` SET
+                            unlocked = false
+        WHERE `user_id` = #{userId}
+    </update>
+
+    <select id="getAmountById" resultType="Integer">
+            SELECT amount
+            FROM `orders`
+            WHERE `id` = #{id}
+    </select>
+
+    <select id="getById" resultMap="OrdersEntityMap">
+        SELECT *
+        FROM `orders`
+        WHERE `id` = #{id}
+    </select>
+
+    <select id="getByUserId" resultMap="OrdersEntityMap">
+        SELECT *
+        FROM `orders`
+        WHERE `user_id` = #{userId}
+    </select>
+
+    <select id="getByTradeNo" resultMap="OrdersEntityMap">
+        SELECT *
+        FROM `orders`
+        WHERE `merchant_trade_no` = #{mTradeNo}
+    </select>
+
+    <update id="addTradeNo">
+        UPDATE  `orders` SET
+                             `merchant_trade_no` = #{mTradeNo}
+        WHERE `id` = #{id}
+    </update>
+    
+    <select id="getPurchasedByUser" resultType="Date">
+        SELECT `purchased_at`
+        FROM `orders`
+        WHERE `user_id` = #{userId}
+    </select>
+
+    <select id="getItemByUser" resultType="Integer">
+        SELECT `item_id`
+        FROM `orders`
+        WHERE `user_id` = #{userId}
+    </select>
+
+
+
+</mapper>

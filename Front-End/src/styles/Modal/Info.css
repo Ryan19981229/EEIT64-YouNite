@@ -1,0 +1,27 @@
+.info {
+  z-index: 999;
+  display: flex;
+  position: fixed;
+  background-color: white;
+  height: 70vh;
+  max-width: 35vw;
+  /* padding: 2rem; */
+  /* margin: 2rem 5rem; */
+  /* align-items: center;
+  justify-items: center; */
+  justify-content: center;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 15px;
+  min-height: 500px;
+  min-width: 400px;
+}
+.info .btnradio {
+  border: dashed;
+  border-width: thin;
+  width: 8vw;
+  height: 20vh;
+}
+.info .btnradio .form-check-input {
+  color: #fa6b6b;
+}/*# sourceMappingURL=Info.css.map */

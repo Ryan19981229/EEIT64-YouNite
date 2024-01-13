@@ -1,0 +1,23 @@
+.modal-bg {
+  z-index: 999;
+  display: flex;
+  position: fixed;
+  background-color: white;
+  height: 30vh;
+  width: 30vw;
+  padding: 2rem;
+  /* margin: 2rem 5rem; */
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 5px 10px;
+}
+
+.footer {
+  justify-content: space-around;
+}
+
+button {
+  border: none;
+}/*# sourceMappingURL=draggableModal.css.map */

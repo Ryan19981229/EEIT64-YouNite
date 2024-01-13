@@ -1,0 +1,50 @@
+@charset "UTF-8";
+.notification-collapse {
+  position: absolute;
+  min-width: 20vw;
+  padding: 1.75rem 0.75rem;
+  z-index: 2;
+  margin-left: 10%;
+  height: 100vh;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 5px 5px 15px 0px;
+  animation: slideIn 0.8s; /* 使用名為 slideIn 的動畫，持續 1 秒並保留最後的狀態 */
+}
+
+.collapse-content {
+  flex-direction: row;
+  align-items: center;
+  transition: background-color 0.25s ease;
+}
+.collapse-content:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.collapse-user-image {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+i {
+  cursor: pointer;
+}
+
+.fa-check {
+  color: green;
+}
+
+.fa-xmark {
+  color: red;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-80%); /* 起始位置在左邊界外 */
+  }
+  to {
+    transform: translateX(0); /* 結束位置在原位 */
+  }
+}/*# sourceMappingURL=notificationCollapse.css.map */

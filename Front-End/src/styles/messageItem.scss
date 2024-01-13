@@ -1,0 +1,66 @@
+#messages {
+  .message {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+    .messageInfo {
+      margin-bottom: 20px;
+    }
+
+    .messageContent {
+      max-width: 80%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      p {
+        background-color: black;
+        padding: 10px 20px;
+        border-radius: 0px 10px 10px 10px;
+        max-width: max-content;
+      }
+    }
+    &.owner {
+      flex-direction: row-reverse;
+
+      .messageContent {
+        align-items: flex-end;
+        p {
+          background-color: #fa6b6b;
+          color: white;
+          border-radius: 10px 0px 10px 10px;
+        }
+      }
+    }
+  }
+}
+
+.chatroom-list {
+  height: 100vh;
+}
+
+.msgBottom {
+  position: fixed;
+  bottom: 0;
+  width: 66vw;
+}
+
+.mesInput {
+  input {
+    width: 50vw;
+    max-height: 50px;
+    border: none;
+    border-radius: 50px;
+  }
+  input[placeholder] {
+    text-indent: 20px;
+  }
+  button {
+    position: absolute;
+    right: 0;
+    height: 50px;
+    width: 60px;
+    margin-right: 10px;
+    border-radius: 50px;
+  }
+}

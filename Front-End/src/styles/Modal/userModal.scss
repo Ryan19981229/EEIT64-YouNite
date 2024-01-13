@@ -1,0 +1,48 @@
+.userInfo {
+    background-image: var(--bg-image);
+    background-position: center;
+    background-size: cover;
+    z-index: 999;
+    position: fixed;
+    background-color: white;
+    height: 72vh;
+    max-width: 25vw;
+    min-height: 500px;
+    min-width: 384px;
+    justify-content: center;
+    // text-align: center;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 15px;
+    opacity: 0;
+    transition: opacity 0.1s ease;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 65%; /* 上方區域的高度為(100% - 33.33%) */
+      left: 0;
+      width: 100%;
+      height: 35%; /* 下方區域的高度為33.33% */
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.80); /* 背景顏色，根據需要調整透明度 */
+      z-index: -1; /* 將叠加層置於底部 */
+    }
+
+    &.fade-in {
+      opacity: 1;
+    }
+
+    .btn {
+      font-size: 8px;
+    }
+  
+    .button {
+      border: none;
+      font-weight: 300;
+    }
+
+    label {
+      font-size: 14px;
+    }
+  }
+  

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tw.com.younite.mapper.FriendMsgTempMapper">
+    <cache-ref namespace="tw.com.younite.mapper.UserMapper"/>
+    <resultMap id="FriendTEMPEntityMap" type="tw.com.younite.entity.FriendMsgTempEntity">
+        <id column="id" property="id"></id>
+        <result column="user_id" property="userID"></result>
+        <result column="friend_id" property="friendID"></result>
+        <result column="last_message" property="lastMessage"></result>
+        <result column="unread_count" property="unread"></result>
+    </resultMap>
+
+    <update id="setLastMsg">
+        UPDATE `friend_messages`
+        SET `last_message` = #{lastMessage}
+        WHERE `user_id` = #{userID}
+        AND `friend_id` = #{friendID}
+    </update>
+    <select id="getRoom" resultMap="FriendTEMPEntityMap" >
+        SELECT id FROM `friend_messages` WHERE user_id=#{userID} AND friend_id=#{friendID};
+    </select>
+    <insert id="createRoom">
+        INSERT INTO `friend_messages` (user_id, friend_id, last_message)
+        VALUES (#{userID}, #{friendID}, #{lastMessage})
+    </insert>
+
+</mapper>

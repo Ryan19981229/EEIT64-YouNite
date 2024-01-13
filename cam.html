@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Stream Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+   
+</head>
+<script>
+      $(function(){
+            let videoElement = document.getElementById('videoElement');
+      
+      // 检查浏览器是否支持getUserMedia
+      $("#start").on("click",function(){
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          // 请求视频流
+          navigator.mediaDevices.getUserMedia({ video: true })
+              .then(function(stream) {
+                  // 将视频流赋值给视频元素的srcObject属性
+                  videoElement.srcObject = stream;
+              })
+              .catch(function(error) {
+                  console.log('Error accessing video stream: ' + error);
+              });
+      } else {
+          console.log('getUserMedia is not supported');
+      }
+      })
+     
+      })
+      
+      </script>
+<body>
+    <video id="videoElement" autoplay></video>
+<button id="start">start</button>
+
+</body>
+</html>

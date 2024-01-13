@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tw.com.younite.mapper.UserPhotosMapper">
+    
+    <cache-ref namespace="tw.com.younite.mapper.UserMapper"/>
+    <resultMap id="UserPhotosEntityMap" type="tw.com.younite.entity.UserPhotosEntity">
+        <id column="profile_id" property="profileID"></id>
+        <result column="photo_id" property="photoID"></result>
+        <result column="photo1_path" property="firstPhotoPath"></result>
+        <result column="photo2_path" property="secondPhotoPath"></result>
+        <result column="photo3_path" property="thirdPhotoPath"></result>
+        <result column="photo4_path" property="fourthPhotoPath"></result>
+        <result column="photo5_path" property="fifthPhotoPath"></result>
+        <result column="photo6_path" property="sixthPhotoPath"></result>
+    </resultMap>
+
+
+    <insert id="addPhotos" useGeneratedKeys="true" keyProperty="photoID">
+        INSERT INTO `photos`
+        (`profile_id`, `photo1_path`, `photo2_path`,`photo3_path`,
+         `photo4_path`, `photo5_path`, `photo6_path`)
+        VALUES (#{profileID}, #{firstPhotoPath}, #{secondPhotoPath},
+                #{thirdPhotoPath}, #{fourthPhotoPath},
+                #{fifthPhotoPath}, #{sixthPhotoPath})
+    </insert>
+
+</mapper>

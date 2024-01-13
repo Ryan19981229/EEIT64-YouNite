@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tw.com.younite.mapper.UserLikeMapper">
+    <cache-ref namespace="tw.com.younite.mapper.UserMapper"/>
+    <resultMap id="UserLikeEntityMap" type="tw.com.younite.entity.UserLikeEntity">
+        <id column="id" property="id"></id>
+        <result column="liked_user_id" property="likedUserID"></result>
+        <result column="user_id" property="userID"></result>
+        <result column="created_at" property="likedAt"></result>
+    </resultMap>
+
+    <insert
+            id="insertLike"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO likes
+            (`user_id`, `liked_user_id`, `created_at`)
+        VALUES (#{userID}, #{likedUserID}, #{likedAt})
+    </insert>
+
+    <select
+            id="getLikedUsers"
+            resultMap="UserLikeEntityMap">
+        SELECT *
+            FROM likes
+        WHERE `user_id` = #{userID}
+    </select>
+
+    <select
+            id="likesTracker"
+            resultMap="UserLikeEntityMap" >
+        SELECT *
+        FROM likes
+        WHERE `liked_user_id` = #{likedUserID}
+    </select>
+
+    <delete id="removeLikedUsers">
+        DELETE
+        FROM `likes`
+        WHERE `user_id` = #{userID}
+          AND `liked_user_id` = #{likedUserID}
+    </delete>
+
+</mapper>

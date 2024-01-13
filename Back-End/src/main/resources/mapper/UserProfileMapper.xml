@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tw.com.younite.mapper.UserProfileMapper">
+    <cache-ref namespace="tw.com.younite.mapper.UserMapper"/>
+    <resultMap id="UserProfileEntityMap" type="tw.com.younite.entity.UserProfileEntity">
+        <id column="profile_id" property="profileId"></id>
+        <result column="user_id" property="userId"></result>
+        <result column="full_name" property="fullName"></result>
+        <result column="profile_avatar" property="profileAvatar"></result>
+        <result column="sexual_orientation" property="sexualOrientation"></result>
+        <result column="preferred_gender" property="preferredGender"></result>
+        <result column="dating_goal" property="datingGoal"></result>
+        <result column="self_intro" property="selfIntro"></result>
+        <result column="blocked_id" property="blockId"></result>
+        <result column="voice_intro" property="voiceIntro"></result>
+        <result column="professions" property="professions"></result>
+    </resultMap>
+
+
+    <select id="getByFullName" resultMap="UserProfileEntityMap">
+        SELECT *
+        FROM `profiles`
+        WHERE `full_name` = #{fullName}
+    </select>
+
+    <select id="getProfileByID" resultMap="UserProfileEntityMap">
+        SELECT *
+        FROM `profiles`
+        WHERE `user_id` = #{userId}
+    </select>
+
+    <select id="getPreferredGender" resultMap="UserProfileEntityMap">
+        SELECT preferred_gender
+        FROM profiles
+        WHERE `user_id` = #{userId}
+    </select>
+
+    <select id="getProfilesByGender" resultMap="UserProfileEntityMap">
+        SELECT *
+        FROM profiles
+        WHERE `gender` = #{gender}
+          AND `user_id` != #{userId}
+    </select>
+
+    <select id="getProfilesByPreferredGender" resultMap="UserProfileEntityMap">
+        SELECT *
+        FROM profiles
+        WHERE `preferred_gender` = #{preferredGender}
+        AND `user_id` != #{userId}
+    </select>
+
+
+
+    <insert
+            id="insertProfile"
+            useGeneratedKeys="true" keyProperty="profileId">
+        INSERT INTO profiles
+        (`profile_id`, `user_id`, `full_name`,
+         `gender`, `sexual_orientation`, `preferred_gender`,
+         `dating_goal`, `self_intro`, `location`,
+         `blocked_id`, `profile_avatar`, `birthday`,
+         `voice_intro`, `phone`, `professions`, `city`)
+        VALUES (#{profileId}, #{userId}, #{fullName},
+                #{gender}, #{sexualOrientation}, #{preferredGender},
+                #{datingGoal}, #{selfIntro}, #{location},
+                #{blockId}, #{profileAvatar}, #{birthday},
+                #{voiceIntro}, #{phone}, #{professions}, #{city})
+    </insert>
+
+    <update id="blockUser">
+        UPDATE `profiles`
+        SET `blocked_id` = JSON_ARRAY_APPEND(COALESCE(`blocked_id`, JSON_ARRAY()), '$', CAST(#{blockId} AS JSON))
+            WHERE `user_id` = ${userId}
+    </update>
+
+    <update id="unblockUser">
+        UPDATE `profiles`
+        SET `blocked_id` = JSON_REMOVE(`blocked_id`, CONCAT('$[', #{index}, ']'))
+            WHERE `user_id` = ${userId}
+    </update>
+
+    <update id="updateUserProfileByID">
+        UPDATE `profiles`
+        SET `full_name`          = #{fullName},
+            `birthday`           = #{birthday},
+            `gender`             = #{gender},
+            `sexual_orientation` = #{sexualOrientation},
+            `dating_goal`        = #{datingGoal},
+            `location`           = #{location},
+            `self_intro`         = #{selfIntro},
+            `preferred_gender`   = #{preferredGender},
+            `profile_avatar`     = #{profileAvatar},
+            `voice_intro`        = #{voiceIntro},
+            `phone`              = #{phone},
+            `professions`        = #{professions},
+            `city`               = #{city}
+        WHERE `user_id` = #{userId}
+    </update>
+
+    <select id="getBlockedID" resultMap="UserProfileEntityMap">
+        SELECT `blocked_id`
+        from `profiles`
+        WHERE `user_id` = #{userId}
+    </select>
+
+    <select id="getProfilesByProfession" resultMap="UserProfileEntityMap">
+        SELECT *
+        from profiles
+        WHERE `user_id` != #{userId}
+          AND professions = #{professions}
+    </select>
+
+</mapper>

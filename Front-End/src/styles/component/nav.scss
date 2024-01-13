@@ -1,0 +1,51 @@
+nav {
+  box-shadow: 15px 0px 10px -15px rgba(0, 0, 0, 0.1);
+  min-height: 100vh;
+  min-width: 10%;
+  position: fixed;
+  z-index: 999;
+}
+
+.nav-user-image {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* 訊息通知數字 */
+.fa-layers.fa-fw {
+  position: relative;
+}
+.badge {
+  font-size: 12px;
+  position: absolute;
+  top: -0.25rem;
+  left: 0.75rem;
+  border-radius: 50%;
+  padding: 0.35rem;
+}
+
+li i {
+  color: black;
+  &:hover {
+    color: #fa6b6b;
+    transform: translateX(1px) translateY(-1px);
+
+    cursor: pointer;
+  }
+}
+
+.nav-bottom i {
+  color: #c3c3c3;
+  &:hover {
+    color: #fa6b6b;
+    transform: translateX(1px) translateY(-1px);
+    transition: transform 0.2s;
+    cursor: pointer;
+  }
+}
+
+.active i {
+  color: #fa6b6b;
+}

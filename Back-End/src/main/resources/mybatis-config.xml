@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 1、属性：例如jdbc.properties -->
+    <properties resource="jdbc.properties"></properties>
+
+    <!-- 2、设置：定义全局性设置，例如开启二级缓存 -->
+    <settings>
+        <setting name="cacheEnabled" value="true/false"/>
+        <setting name="localCacheScope" value="SESSION/STATEMENT"/>
+    </settings>
+
+
+    <!-- 4、类型处理器：定义Java类型与数据库中的数据类型之间的转换关系 -->
+    <typeHandlers></typeHandlers>
+
+    <!-- 5、对象工厂 -->
+    <objectFactory type=""></objectFactory>
+
+    <!-- 6、插件：mybatis的插件，支持自定义插件 -->
+    <plugins>
+        <plugin interceptor=""></plugin>
+    </plugins>
+
+    <!-- 7、环境：配置mybatis的环境 -->
+    <environments default="development">
+        <!-- 环境变量：支持多套环境变量，例如开发环境、生产环境 -->
+        <environment id="development">
+            <!-- 事务管理器：默认JDBC -->
+            <transactionManager type="JDBC" />
+            <!-- 数据源：使用连接池，并加载mysql驱动连接数据库 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://younite-database.c7ta6ybbk9nu.ap-northeast-1.rds.amazonaws.com:3306/younite" />
+                <property name="username" value="admin" />
+                <property name="password" value="younite666" />
+            </dataSource>
+        </environment>
+    </environments>
+
+
+    <!-- 9、映射器：指定映射文件或者映射类 -->
+    <mappers>
+        <mapper resource="UserProfileMapper.xml" />
+        <mapper resource="UserMapper.xml" />
+        <mapper resource="UserPhotosMapper.xml" />
+        <mapper resource="UserLikeMapper.xml" />
+        <mapper resource="RoomMapper.xml" />
+        <mapper resource="OrdersMapper.xml" />
+        <mapper resource="MessageMapper.xml" />
+        <mapper resource="ItemsMapper.xml" />
+        <mapper resource="InterestMapper.xml" />
+        <mapper resource="FriendProfilesMapper.xml" />
+        <mapper resource="FriendMessageTempMapper.xml" />
+        <mapper resource="FriendMapper.xml" />
+    </mappers>
+
+</configuration>

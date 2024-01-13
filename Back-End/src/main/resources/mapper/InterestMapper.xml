@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tw.com.younite.mapper.InterestMapper">
+    <cache-ref namespace="tw.com.younite.mapper.UserMapper"/>
+    <resultMap id="InterestEntityMap" type="tw.com.younite.entity.InterestEntity">
+        <id column="id" property="id"></id>
+        <result column="user_id" property="userID"></result>
+        <result column="interest" property="interest"></result>
+    </resultMap>
+
+    <insert id="addInterest" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `interests`
+            (`user_id`, `interest`)
+        VALUES (#{userID}, #{interest})
+    </insert>
+
+    <select id="getInterests" resultMap="InterestEntityMap">
+        SELECT `interest`, `user_id`
+        FROM `interests`
+        WHERE `user_id` = #{userID}
+    </select>
+
+    <!--    <select id="findUsersByInterests" resultMap="InterestEntityMap">-->
+    <!--        SELECT *-->
+    <!--        FROM `interests`-->
+    <!--        WHERE interest-->
+    <!--        LIKE CONCAT("%", #{interest}, "%")-->
+    <!--        AND `user_id` != #{userID}-->
+    <!--    </select>    -->
+
+    <select id="findUsersByInterests" resultMap="InterestEntityMap">
+        SELECT p.*, i.interest
+        FROM profiles p
+                 JOIN interests i ON p.user_id = i.user_id
+        WHERE i.interest
+            LIKE CONCAT("%", #{interest}, "%")
+          AND p.user_id != #{userID}
+          AND p.gender = #{gender}
+    </select>
+
+    <select id="findAllUsersByInterests" resultMap="InterestEntityMap">
+        SELECT p.*, i.interest
+        FROM profiles p
+                 JOIN interests i ON p.user_id = i.user_id
+        WHERE i.interest
+            LIKE CONCAT("%", #{interest}, "%")
+          AND p.user_id != #{userID}
+    </select>
+
+    <delete id="removeInterests">
+        DELETE
+        FROM `interests`
+        WHERE `user_id` = #{userID}
+    </delete>
+
+</mapper>

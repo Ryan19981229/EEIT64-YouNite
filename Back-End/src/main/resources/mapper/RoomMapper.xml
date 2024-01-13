@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tw.com.younite.mapper.RoomMapper">
+    <cache-ref namespace="tw.com.younite.mapper.UserMapper"/>
+    <resultMap id="RoomEntityMap" type="tw.com.younite.entity.RoomEntity">
+        <id column="id" property="id"></id>
+        <result column="friendID1" property="friendID1"></result>
+        <result column="friendID2" property="friendID2"></result>
+
+    </resultMap>
+
+    <insert id="createRoom" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `room` (friendID1, friendID2)
+        VALUES (#{friendID1}, #{friendID2})
+    </insert>
+
+
+    <select id="getRoom" resultMap="RoomEntityMap" >
+        SELECT id FROM `room` WHERE friendID1=#{friendID1} AND friendID2=#{friendID2};
+    </select>
+
+
+
+</mapper>

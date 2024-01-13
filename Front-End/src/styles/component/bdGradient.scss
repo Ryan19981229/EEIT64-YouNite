@@ -1,0 +1,18 @@
+.bg-page-gradient {
+  padding: 1.25rem 5rem;
+  min-height: 100vh;
+  margin-left: 10%;
+  background-image: url('../../assets/images/bgc.png'), url('../../assets/images/bgc.png');
+  background-repeat: no-repeat, no-repeat;
+  background-position: calc(100% - 1000px) calc(100% - 400px), calc(100% + 300px) calc(100% + 250px);
+  background-attachment: fixed, fixed;
+
+  .bg-pageMain {
+    padding: 1.25rem;
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(100px);
+    -webkit-backdrop-filter: blur(100px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+}

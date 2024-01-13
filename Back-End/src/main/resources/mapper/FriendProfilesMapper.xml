@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tw.com.younite.mapper.FriendProfileMapper">
+    <cache-ref namespace="tw.com.younite.mapper.UserMapper"/>
+    <resultMap id="FriendProfileEntityMap" type="tw.com.younite.entity.FriendsProfileEntity">
+        <id column="id" property="id"></id>
+        <result column="user_id " property="userID"></result>
+        <result column="full_name" property="fullName"></result>
+        <result column="last_message" property="lastMessage"></result>
+        <result column="profile_avatar" property="profileAvatar"></result>
+        <result column="unread_count" property="unread"></result>
+    </resultMap>
+
+
+
+    <select id="getFriendProfile" resultMap="FriendProfileEntityMap" >
+        SELECT p.`full_name`,p.`user_id`,f.`last_message`,p.`profile_avatar`,f.`unread_count`
+        FROM  `friend_messages` f join `profiles` p on p.`user_id`=f.`friend_id`
+        WHERE f.`user_id` =  #{userid}
+    </select>
+    <select id="getFriendProfile2" resultMap="FriendProfileEntityMap" >
+        SELECT p.`full_name`,p.`user_id`,f.`last_message`,p.`profile_avatar`,f.`unread_count`
+        FROM  `friend_messages` f join `profiles` p on p.`user_id`=f.`user_id`
+        WHERE f.`friend_id` =  #{friendID}
+    </select>
+
+
+
+</mapper>

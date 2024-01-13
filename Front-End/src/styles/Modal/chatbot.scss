@@ -1,0 +1,107 @@
+.modal-bg {
+  z-index: 999;
+  position: fixed;
+  background: linear-gradient(to bottom, #ffdcdc 12%, rgb(255, 255, 255, 0.9) 12%);
+  max-width: 400px;
+  min-height: 400px;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 8px;
+  border-radius: 5px;
+  opacity: 0;
+  transition: opacity 0.1s ease;
+  &.fade-in {
+    opacity: 1;
+  }
+  .btn-close {
+    border: none;
+  }
+  .chatBotContent {
+    padding: 1.5rem 0.5rem;
+    flex-direction: column;
+    gap: 10px;
+    section {
+      max-height: 300px;
+      flex-direction: column;
+      margin-bottom: 50px;
+      overflow-y: auto;
+      &::-webkit-scrollbar-track {
+        border-radius: 2px;
+      }
+      &::-webkit-scrollbar {
+        width: 5px;
+        background-color: #f7f7f7;
+      }
+      &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: #e8e8e8;
+      }
+    }
+    p {
+      font-size: 14px;
+      background-color: #f4f3fd;
+      padding: 10px 20px;
+      border-radius: 0px 10px 10px 10px;
+      max-width: max-content;
+    }
+    p:nth-child(odd) {
+      background-color: #ffdcdc;
+      color: black;
+      border-radius: 10px 0px 10px 10px;
+      align-self: flex-end;
+      margin-right: 1rem;
+    }
+  }
+
+  .hide {
+    visibility: hidden;
+    display: none;
+  }
+  form {
+    background-color: white;
+    margin: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  input {
+    width: 100%;
+    border: none;
+    font-weight: 100;
+    &:focus-visible {
+      outline: none;
+    }
+  }
+  button {
+    border: none;
+    max-width: 3rem;
+    margin-bottom: 1rem;
+    &:hover {
+      transform: translateX(1px) translateY(-1px);
+      transition: transform 0.2s;
+    }
+  }
+}
+
+/* 輸入文字特效 */
+@keyframes cursor-blink {
+  0% {
+    opacity: 0;
+  }
+}
+
+/* ScrolBar  */
+.scrollbar {
+  height: 90%;
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.scrollbar:hover {
+  height: 90%;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}

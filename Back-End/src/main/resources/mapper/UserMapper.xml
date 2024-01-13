@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tw.com.younite.mapper.UserMapper">
+    <cache
+            type = "org.apache.ibatis.cache.impl.PerpetualCache"
+            size="1024"
+            eviction="LRU"
+            flushInterval="12000"
+            readOnly="true"
+    />
+
+    <resultMap id="UserEntityMap" type="tw.com.younite.entity.UserEntity">
+        <id column="id" property="id"></id>
+        <result column="created_at" property="createdAt"></result>
+        <result column="modified_at" property="modifiedAt"></result>
+        <result column="third_party_login" property="thirdPartyLogin"></result>
+        <result column="facebook_user" property="facebookUser"></result>
+        <result column="google_user" property="googleUser"></result>
+        <result column="vip_expiry" property="vipExpiry"></result>
+        <result column="unlocked" property="unlocked"></result>
+        <result column="log_time" property="logTime"></result>
+        <result column="reset_token" property="resetToken" />
+
+
+    </resultMap>
+
+
+    <select id="getByUsername" resultMap="UserEntityMap">
+        SELECT *
+        FROM `users`
+        WHERE username = #{username}
+    </select>
+
+
+
+    <select id="getByUserEmail" resultMap="UserEntityMap">
+        SELECT *
+        FROM `users`
+        WHERE email = #{email}
+    </select>
+
+<!--    <select id="getByUserPhone" resultMap="UserEntityMap">-->
+<!--        SELECT *-->
+<!--        FROM `users`-->
+<!--        WHERE phone = #{phone}-->
+<!--    </select>-->
+
+    <select id="getUserByID" resultMap="UserEntityMap">
+        SELECT *
+        FROM `users`
+        WHERE `id` = #{id}
+    </select>
+
+    <select id="getAllUsers" resultMap="UserEntityMap">
+        SELECT *
+        FROM `users`
+    </select>
+
+    <select id="trial" resultMap="UserEntityMap">
+        SELECT u.id, p.full_name
+        FROM users u
+                 JOIN profiles p on p.user_id = u.id;
+    </select>
+    <select id="tokenByEmail" resultType="string">
+        SELECT reset_token
+        FROM users
+        WHERE email = #{email}
+    </select>
+    <insert
+            id="register"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO users
+        (`username`, `email`, `password`,
+         `third_party_login`, `facebook_user`, `google_user`,
+         `vip_expiry`, `created_at`, `modified_at`, `salt`)
+        VALUES (#{username}, #{email}, #{password}, #{thirdPartyLogin}, #{facebookUser}, #{googleUser},
+                #{vipExpiry}, #{createdAt}, #{modifiedAt}, #{salt})
+    </insert>
+
+    <insert
+            id="registerByOAuth"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO users
+        (`id`, `username`, `password`, `email`, `third_party_login`, `facebook_user`, `google_user`,
+         `vip_expiry`, `created_at`, `modified_at`)
+        VALUES (#{id}, #{username}, #{password}, #{email}, #{thirdPartyLogin}, #{facebookUser}, #{googleUser},
+                #{vipExpiry}, #{createdAt}, #{modifiedAt})
+    </insert>
+
+    <update id="updatePasswordByID">
+        UPDATE `users`
+        SET password    = #{password},
+            modified_at = #{modifiedAt}
+        WHERE `id` = ${id}
+    </update>
+
+    <update id="updateVipById">
+        UPDATE `users`
+        SET vip_expiry = #{vipExpiry},
+            unlocked = True
+        WHERE `id` = ${id}
+    </update>
+
+    <update id="lockedVipById">
+        UPDATE `users`
+        SET unlocked = False
+        WHERE `id` = ${id}
+    </update>
+    <update id="updateLogTime">
+        UPDATE `users`
+        SET `log_time`   = #{logTime}
+        WHERE `id` = ${id}
+    </update>
+    <update id="updatePasswordByEmail">
+        UPDATE users
+        SET password   = #{password}
+        WHERE email = #{email}
+    </update>
+    <update id="updateResetTokenByEmail">
+        UPDATE users
+        SET reset_token = #{resetToken}
+        WHERE email = #{email}
+    </update>
+
+</mapper>

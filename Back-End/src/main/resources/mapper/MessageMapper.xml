@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tw.com.younite.mapper.MessageMapper">
+    <cache-ref namespace="tw.com.younite.mapper.UserMapper"/>
+    <resultMap id="MessageEntityMap" type="tw.com.younite.entity.MessageEntity">
+        <id column="messageId" property="messageId"></id>
+        <result column="senderId" property="senderId"></result>
+        <result column="receiverId" property="receiverId"></result>
+        <result column="messageType" property="messageType"></result>
+        <result column="roomId" property="roomId"></result>
+        <result column="timestamp" property="timestamp"></result>
+        <result column="messageContent" property="messageContent"></result>
+        <result column="count" property="count"></result>
+    </resultMap>
+
+    <insert id="insertMessage" useGeneratedKeys="true" keyProperty="messageId">
+        INSERT INTO `RoomMessages` (senderId, receiverId, messageType, roomId, messageContent)
+        VALUES (#{senderId}, #{receiverId}, #{messageType}, #{roomId}, #{messageContent})
+    </insert>
+
+    <select id="getMessages" resultMap="MessageEntityMap" >
+        SELECT *
+        FROM  `RoomMessages`
+        WHERE `roomId` =  #{roomId}
+    </select>
+<select id="getUnreadNo" resultMap="MessageEntityMap" resultType="int">
+    SELECT count(*) as count FROM `RoomMessages` WHERE `Timestamp` >
+    (SELECT log_time FROM users WHERE id=${receiverId}) and receiverId=${receiverId} AND senderId=${senderId};
+</select>
+</mapper>

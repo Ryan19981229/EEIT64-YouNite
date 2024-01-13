@@ -1,0 +1,49 @@
+.user-card {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 2px 5px;
+  border-radius: 10px;
+  margin: 5px;
+  &:hover {
+    transform: translateY(-2px);
+    transition: transform 0.5s;
+    cursor: pointer;
+  }
+}
+
+.user-card-image {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-lock {
+  :hover {
+    transform: none;
+    transition: none;
+    cursor: default;
+  }
+  ::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 85%;
+    border-radius: 10px;
+    backdrop-filter: blur(1px); /* 使用高斯模糊效果，調整模糊半徑以達到想要的效果 */
+    z-index: 1; /* 確保覆蓋層在內容之上 */
+  }
+}
+
+.fa-user-lock {
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  font-size: 5rem;
+  z-index: 999;
+  &:hover {
+    transform: translateY(-5px);
+    transition: transform 0.5s;
+    cursor: pointer;
+  }
+}

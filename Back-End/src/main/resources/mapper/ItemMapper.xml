@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tw.com.younite.mapper.ItemMapper">
+    <cache-ref namespace="tw.com.younite.mapper.UserMapper"/>
+    <resultMap id="ItemEntityMap" type="tw.com.younite.entity.ItemEntity">
+        <id column="id" property="id"></id>
+        <result column="item_name" property="itemName"></result>
+        <result column="price" property="price"></result>
+    </resultMap>
+
+
+    <select id="selectAll" resultMap="ItemEntityMap">
+        SELECT * FROM `item`;
+    </select>
+
+
+    <select id="getItemPriceByItemId" resultMap="ItemEntityMap">
+        SELECT price
+        FROM item
+        WHERE id = #{itemId}
+    </select>
+
+    <select id="getItemNameByItemId" resultType="string">
+        SELECT item_name
+        FROM item
+        WHERE id = #{itemId}
+    </select>
+
+
+</mapper>

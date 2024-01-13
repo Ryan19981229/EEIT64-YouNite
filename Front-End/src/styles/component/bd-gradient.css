@@ -1,0 +1,64 @@
+.homepage {
+  padding-top: 0.25rem;
+  padding-left: 200px;
+  height: 100%;
+  background-image: url("../pages/imgpages/bgc.png"), url("../pages/imgpages/bgc.png");
+  background-repeat: no-repeat, no-repeat;
+  background-position: calc(100% - 500px) calc(100% - 400px), calc(100% + 300px) calc(100% + 250px);
+}
+
+.homepage .homePageMain {
+  width: 90%;
+  margin: 2rem;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.15);
+  -webkit-backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.homepage .homePageMain .homePageTitle {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.homepage .homePageMain .homePageTitle .FilterBtn {
+  background-color: #fa6b6b;
+}
+
+.homepage .homePageMain .homePagePhoto {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.homepage .homePageMain .homePageMore {
+  display: flex;
+  justify-content: end;
+}
+
+.homepage .homePageMain .homePageMore a {
+  text-decoration: none;
+  color: #fa6b6b;
+  font-weight: bolder;
+}
+
+.homepage .homPageBottom {
+  display: flex;
+  flex-direction: row;
+}
+
+.homepage .homPageBottom .homePageBottomCard {
+  background-color: rgba(255, 255, 255, 0.15);
+  -webkit-backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  width: 90%;
+  margin: 2rem;
+  padding: 2rem;
+} /*# sourceMappingURL=bd-gradient.css.map */
